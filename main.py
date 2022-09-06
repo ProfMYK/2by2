@@ -1,5 +1,5 @@
 solved = ['W', 'W', 'W', 'W', 'O', 'O', 'G', 'G', 'R', 'R', 'O',
-          'O', 'G', 'G', 'R', 'R', 'Y', 'Y', 'Y', 'Y', 'B', 'B', 'B', 'B']
+          'O', 'G', 'G', 'R', 'R', 'Y', 'Y', 'Y', 'Y', 'a', 'b', 'c', 'd']
 
 
 def print_state(cubeState: str):
@@ -125,20 +125,45 @@ def Move(cube: str, move: int, amount: int = 1):
             cube[d[2]] = cube[d[3]]
             cube[d[3]] = t
         elif move == 4:  # Front
-            _ = cube[f[2]], cube[f[3]]
-            cube[f[2]] = cube[l[2]]
-            cube[f[3]] = cube[l[3]]
-            t = cube[r[2]], cube[r[3]]
-            cube[r[2]] = _[0]
-            cube[r[3]] = _[1]
-            _ = cube[b[2]], cube[b[3]]
-            cube[b[2]] = t[0]
-            cube[b[3]] = t[1]
-            cube[l[2]] = _[0]
-            cube[l[3]] = _[1]
+            _ = cube[l[1]], cube[l[3]]
+            cube[l[1]] = cube[d[0]]
+            cube[l[3]] = cube[d[1]]
+            t = cube[u[2]], cube[u[3]]
+            cube[u[2]] = _[0]
+            cube[u[3]] = _[1]
+            _ = cube[r[0]], cube[r[2]]
+            cube[r[0]] = t[0]
+            cube[r[2]] = t[1]
+            cube[d[0]] = _[0]
+            cube[d[1]] = _[1]
+            _ = cube[f[0]]
+            cube[f[0]] = cube[f[2]]
+            t = cube[f[1]]
+            cube[f[1]] = _
+            cube[f[2]] = cube[f[3]]
+            cube[f[3]] = t
         elif move == 5:  # Back
-            print("B")
+            _ = cube[r[1]], cube[r[3]]
+            cube[r[1]] = cube[d[2]]
+            cube[r[3]] = cube[d[3]]
+            t = cube[u[0]], cube[u[1]]
+            cube[u[0]] = _[0]
+            cube[u[1]] = _[1]
+            _ = cube[l[0]], cube[l[2]]
+            cube[l[0]] = t[0]
+            cube[l[2]] = t[1]
+            cube[d[2]] = _[0]
+            cube[d[3]] = _[1]
+            _ = cube[b[0]]
+            cube[b[0]] = cube[b[2]]
+            t = cube[b[1]]
+            cube[b[1]] = _
+            cube[b[2]] = cube[b[3]]
+            cube[b[3]] = t
 
 
-Move(solved, 0)
+# Debug
+Move(solved, 5)
 print_state(solved)
+
+# TODO: Calculate all posible combinations with graphs!
