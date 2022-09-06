@@ -1,5 +1,5 @@
 solved = ['W', 'W', 'W', 'W', 'O', 'O', 'G', 'G', 'R', 'R', 'O',
-          'O', 'G', 'G', 'R', 'R', 'a', 'b', 'c', 'd', 'B', 'B', 'B', 'B']
+          'O', 'G', 'G', 'R', 'R', 'Y', 'Y', 'Y', 'Y', 'B', 'B', 'B', 'B']
 
 
 def print_state(cubeState: str):
@@ -125,12 +125,20 @@ def Move(cube: str, move: int, amount: int = 1):
             cube[d[2]] = cube[d[3]]
             cube[d[3]] = t
         elif move == 4:  # Front
-            print("F")
+            _ = cube[f[2]], cube[f[3]]
+            cube[f[2]] = cube[l[2]]
+            cube[f[3]] = cube[l[3]]
+            t = cube[r[2]], cube[r[3]]
+            cube[r[2]] = _[0]
+            cube[r[3]] = _[1]
+            _ = cube[b[2]], cube[b[3]]
+            cube[b[2]] = t[0]
+            cube[b[3]] = t[1]
+            cube[l[2]] = _[0]
+            cube[l[3]] = _[1]
         elif move == 5:  # Back
             print("B")
 
 
-print_state(solved)
-print(get_side(solved, 0))
-Move(solved, 3)
+Move(solved, 0)
 print_state(solved)
