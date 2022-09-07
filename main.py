@@ -1,5 +1,10 @@
-solved = ['W', 'W', 'W', 'W', 'O', 'O', 'G', 'G', 'R', 'R', 'O',
-          'O', 'G', 'G', 'R', 'R', 'Y', 'Y', 'Y', 'Y', 'a', 'b', 'c', 'd']
+import colorama
+from colorama import Back
+
+colorama.init(autoreset=True)
+
+solved = [f'{Back.WHITE}W', f'{Back.WHITE}W', f'{Back.WHITE}W', f'{Back.WHITE}W', f'{Back.MAGENTA}O', f'{Back.MAGENTA}O', f'{Back.GREEN}G', f'{Back.GREEN}G', f'{Back.RED}R', f'{Back.RED}R', f'{Back.MAGENTA}O',
+          f'{Back.MAGENTA}O', f'{Back.GREEN}G', f'{Back.GREEN}G', f'{Back.RED}R', f'{Back.RED}R', f'{Back.YELLOW}Y', f'{Back.YELLOW}Y', f'{Back.YELLOW}Y', f'{Back.YELLOW}Y', f'{Back.BLUE}B', f'{Back.BLUE}B', f'{Back.BLUE}B', f'{Back.BLUE}B']
 
 
 def print_state(cubeState: str):
@@ -37,12 +42,12 @@ def get_side(cube: str, side: int):
     return s
 
 
-def Move(cube: str, move: int, amount: int = 1):
+def Move(cube: str, move: str, amount: int = 1):
     """A simple funtion to rotate(move) a side of the cube by a certian amount.
 
     Args:
         cube (str): Rubik's cubes current state.
-        move (int): The face of the cube to rotate represented as a number. (0->R, 1->L, 2->U, 3->D, 4->F, 5->B).
+        move (str): The face of the cube to be rotated.
         amount (int): The amount of the move that is going to done to do cube. Defaults to 1.
     """
     r = get_side(cube, 0)
@@ -52,7 +57,7 @@ def Move(cube: str, move: int, amount: int = 1):
     f = get_side(cube, 4)
     b = get_side(cube, 5)
     for i in range(amount):
-        if move == 0:  # Right
+        if move == 'R':  # Right
             _ = cube[f[1]], cube[f[3]]
             cube[f[1]] = cube[d[1]]
             cube[f[3]] = cube[d[3]]
@@ -70,7 +75,7 @@ def Move(cube: str, move: int, amount: int = 1):
             cube[r[1]] = _
             cube[r[2]] = cube[r[3]]
             cube[r[3]] = t
-        elif move == 1:  # Left
+        elif move == 'L':  # Left
             _ = cube[f[0]], cube[f[2]]
             cube[f[0]] = cube[u[0]]
             cube[f[2]] = cube[u[2]]
@@ -88,34 +93,34 @@ def Move(cube: str, move: int, amount: int = 1):
             cube[l[1]] = _
             cube[l[2]] = cube[l[3]]
             cube[l[3]] = t
-        elif move == 2:  # Up
+        elif move == 'U':  # Up
             _ = cube[f[0]], cube[f[1]]
             cube[f[0]] = cube[r[0]]
             cube[f[1]] = cube[r[1]]
             t = cube[l[0]], cube[l[1]]
             cube[l[0]] = _[0]
             cube[l[1]] = _[1]
-            _ = cube[b[0]], cube[b[1]]
-            cube[b[0]] = t[0]
-            cube[b[1]] = t[1]
-            cube[r[0]] = _[0]
-            cube[r[1]] = _[1]
+            _ = cube[b[2]], cube[b[3]]
+            cube[b[2]] = t[1]
+            cube[b[3]] = t[0]
+            cube[r[0]] = _[1]
+            cube[r[1]] = _[0]
             _ = cube[u[0]]
             cube[u[0]] = cube[u[2]]
             t = cube[u[1]]
             cube[u[1]] = _
             cube[u[2]] = cube[u[3]]
             cube[u[3]] = t
-        elif move == 3:  # Down
+        elif move == 'D':  # Down
             _ = cube[f[2]], cube[f[3]]
             cube[f[2]] = cube[l[2]]
             cube[f[3]] = cube[l[3]]
             t = cube[r[2]], cube[r[3]]
             cube[r[2]] = _[0]
             cube[r[3]] = _[1]
-            _ = cube[b[2]], cube[b[3]]
-            cube[b[2]] = t[0]
-            cube[b[3]] = t[1]
+            _ = cube[b[1]], cube[b[0]]
+            cube[b[1]] = t[0]
+            cube[b[0]] = t[1]
             cube[l[2]] = _[0]
             cube[l[3]] = _[1]
             _ = cube[d[0]]
@@ -124,34 +129,34 @@ def Move(cube: str, move: int, amount: int = 1):
             cube[d[1]] = _
             cube[d[2]] = cube[d[3]]
             cube[d[3]] = t
-        elif move == 4:  # Front
+        elif move == 'F':  # Front
             _ = cube[l[1]], cube[l[3]]
             cube[l[1]] = cube[d[0]]
             cube[l[3]] = cube[d[1]]
             t = cube[u[2]], cube[u[3]]
-            cube[u[2]] = _[0]
-            cube[u[3]] = _[1]
+            cube[u[2]] = _[1]
+            cube[u[3]] = _[0]
             _ = cube[r[0]], cube[r[2]]
             cube[r[0]] = t[0]
             cube[r[2]] = t[1]
-            cube[d[0]] = _[0]
-            cube[d[1]] = _[1]
+            cube[d[0]] = _[1]
+            cube[d[1]] = _[0]
             _ = cube[f[0]]
             cube[f[0]] = cube[f[2]]
             t = cube[f[1]]
             cube[f[1]] = _
             cube[f[2]] = cube[f[3]]
             cube[f[3]] = t
-        elif move == 5:  # Back
+        elif move == 'B':  # Back
             _ = cube[r[1]], cube[r[3]]
-            cube[r[1]] = cube[d[2]]
-            cube[r[3]] = cube[d[3]]
+            cube[r[1]] = cube[d[3]]
+            cube[r[3]] = cube[d[2]]
             t = cube[u[0]], cube[u[1]]
             cube[u[0]] = _[0]
             cube[u[1]] = _[1]
             _ = cube[l[0]], cube[l[2]]
-            cube[l[0]] = t[0]
-            cube[l[2]] = t[1]
+            cube[l[0]] = t[1]
+            cube[l[2]] = t[0]
             cube[d[2]] = _[0]
             cube[d[3]] = _[1]
             _ = cube[b[0]]
@@ -162,8 +167,31 @@ def Move(cube: str, move: int, amount: int = 1):
             cube[b[3]] = t
 
 
+def Scramble(scramble: list, cube: str):
+    """Scrambles the cube using the given scramble
+
+    Args:
+        scramble (list): Scramble to be aplied
+        cube (str): Cubes current state
+    """
+    for move in scramble:
+        print_state(cube)
+        if len(move) == 2:
+            if move[1] == "'":
+                Move(cube, move[0], amount=3)
+            elif move[1] == "2":
+                Move(cube, move[0], amount=2)
+        else:
+            Move(cube, move)
+
+        print("\nMove: ", move, "\n")
+        print_state(cube)
+        print("\n-----------------------------------------------------\n")
+
+
 # Debug
-Move(solved, 5)
-print_state(solved)
+scramble = "R2 U2 R U' F2 R F2 U' R' U'".split(" ")
+Scramble(scramble, solved)
+# print_state(solved)
 
 # TODO: Calculate all posible combinations with graphs!
