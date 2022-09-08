@@ -1,7 +1,12 @@
 from functions import *
+import time
+
+recursion_limit = 4
 
 
 def Solve(cube, sol, rec):
+    if rec == 0:
+        print("Finding a solution...")
     solution = sol
 
     nexts = []
@@ -16,26 +21,40 @@ def Solve(cube, sol, rec):
 
     solutions = []
 
-    if rec < 6:
+    if rec < recursion_limit:
         for i, next in enumerate(nexts):
             a = Solve(next, solution + f" {MoveNum(temp, i)}", rec+1)
             if a != -1:
-                solutions.append(a[1:].split(" "))
+                print(a, rec)
+                if a[0] != " ":
+                    solutions.append(a.split(" "))
+                else:
+                    solutions.append(a[1:].split(" "))
 
     if len(solutions) > 0:
+        solution = []
+        smal = 10000
+        for sl in solutions:
+            if len(sl) < smal:
+                smal = len(sl)
+                solution = sl
+
         solutionStr = ""
-        for char in solutions[0]:
+        for char in solution:
             solutionStr += f"{char} "
 
-        print(solutionStr, rec)
+        return solutionStr
 
     return -1
 
 
 scrambled = list(solved)
-Scramble("L' U' L U' L' U2 L".split(" "), scrambled)
+scramble = input("Enter your scramble: ")
+recursion_limit = len(scramble.split(" ")) - 1
+Scramble(scramble.split(" "), scrambled)
 
+a = time.time()
 print(Solve(scrambled, "", 0))
-
+print(f"Took {int(time.time()-a)} seconds to calculate!")
 
 # TODO: Calculate all posible combinations with graphs!
