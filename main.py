@@ -1,5 +1,6 @@
-from functions import *
 import time
+
+from functions import *
 
 recursion_limit = 4
 
@@ -57,4 +58,4 @@ a = time.time()
 print(Solve(scrambled, "", 0))
 print(f"Took {int(time.time()-a)} seconds to calculate!")
 
-# TODO: Calculate all posible combinations with graphs!
+# TODO: Try to solve it with algorithms and stuff
