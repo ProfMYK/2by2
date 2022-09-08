@@ -5,6 +5,8 @@ colorama.init(autoreset=True)
 
 solved = [f'{Back.WHITE}W', f'{Back.WHITE}W', f'{Back.WHITE}W', f'{Back.WHITE}W', f'{Back.MAGENTA}O', f'{Back.MAGENTA}O', f'{Back.GREEN}G', f'{Back.GREEN}G', f'{Back.RED}R', f'{Back.RED}R', f'{Back.MAGENTA}O',
           f'{Back.MAGENTA}O', f'{Back.GREEN}G', f'{Back.GREEN}G', f'{Back.RED}R', f'{Back.RED}R', f'{Back.YELLOW}Y', f'{Back.YELLOW}Y', f'{Back.YELLOW}Y', f'{Back.YELLOW}Y', f'{Back.BLUE}B', f'{Back.BLUE}B', f'{Back.BLUE}B', f'{Back.BLUE}B']
+temp = [f'{Back.WHITE}W', f'{Back.WHITE}W', f'{Back.WHITE}W', f'{Back.WHITE}W', f'{Back.MAGENTA}O', f'{Back.MAGENTA}O', f'{Back.GREEN}G', f'{Back.GREEN}G', f'{Back.RED}R', f'{Back.RED}R', f'{Back.MAGENTA}O',
+        f'{Back.MAGENTA}O', f'{Back.GREEN}G', f'{Back.GREEN}G', f'{Back.RED}R', f'{Back.RED}R', f'{Back.YELLOW}Y', f'{Back.YELLOW}Y', f'{Back.YELLOW}Y', f'{Back.YELLOW}Y', f'{Back.BLUE}B', f'{Back.BLUE}B', f'{Back.BLUE}B', f'{Back.BLUE}B']
 
 
 def print_state(cubeState: str):

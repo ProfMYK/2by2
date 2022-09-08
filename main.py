@@ -1,7 +1,7 @@
 from functions import *
 
 
-def Solve(cube, sol):
+def Solve(cube, sol, rec):
     solution = sol
 
     nexts = []
@@ -10,27 +10,32 @@ def Solve(cube, sol):
         curr = list(cube)
         a = MoveNum(curr, i)
         if curr == solved:
-            solution += f"{a} "
+            solution += f" {a}"
             return solution
         nexts.append(list(curr))
 
-    # for i, next in enumerate(nexts):
-    #     print(i)
-    #     print_state(next)
-    #     print("\n===============================\n")
-        # a = Solve(next, solution)
-        # if a != -1:
-        #     solution += f"{a} "
-        #     return solution
-    a = Solve(list(nexts[8]), "")
+    solutions = []
 
-    return "-1"
+    if rec < 6:
+        for i, next in enumerate(nexts):
+            a = Solve(next, solution + f" {MoveNum(temp, i)}", rec+1)
+            if a != -1:
+                solutions.append(a[1:].split(" "))
+
+    if len(solutions) > 0:
+        solutionStr = ""
+        for char in solutions[0]:
+            solutionStr += f"{char} "
+
+        print(solutionStr, rec)
+
+    return -1
 
 
 scrambled = list(solved)
-Scramble(["R2", "U"], scrambled)
+Scramble("L' U' L U' L' U2 L".split(" "), scrambled)
 
-print(Solve(scrambled, ""))
+print(Solve(scrambled, "", 0))
 
 
 # TODO: Calculate all posible combinations with graphs!
